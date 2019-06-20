@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.http import HttpResponse
 from .forms import UserRegisterForm
 from .models import Profile
+from instagram.models import Post
 from django.contrib.auth.models import User
 
 
@@ -23,4 +24,9 @@ def register(request):
 def profile(request, **kwargs):
     username = kwargs['username']
     user = User.objects.filter(username=username).first()
-    return render(request, 'users/profile.html', {'view_user': user})
+    posts = Post.objects.filter(author=user).order_by('-date_posted')
+    context = {
+        'view_user': user,
+        'posts': posts,
+    }
+    return render(request, 'users/profile.html', context)

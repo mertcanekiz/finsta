@@ -1,7 +1,53 @@
 {% extends 'instagram/layout.html' %}
 {% load static %}
 {% block content %}
-<h1>{{ view_user.username }}</h1>
+
+<div class="container">
+    <div class="row pt-3">
+        <div class="col-auto">
+            <img class="rounded-circle" width="75" src="{% static 'users/img/'|add:view_user.profile.picture %}" alt="{{ view_user.username }}">
+        </div>
+        <div class="col my-auto">
+            <h2>{{ view_user.username }}</h2>
+        </div>
+    </div>
+</div>
+
+{% for post in posts %}
+<!-- Card -->
+<div class="card card-cascade narrower my-5">
+    <!-- Card image -->
+    <div class="view view-cascade overlay">
+        <img class="card-img-top" src="{% static 'instagram/img/'|add:post.image %}" alt="{{ post.description }}">
+        <a href="#" class="like-img">
+            <div class="card-img-top mask rgba-white-slight" data-id="{{ post.id }}"></div>
+        </a>
+    </div>
+    <!-- Card content -->
+    <div class="card-body">
+        <!-- Title -->
+        <a href="{% url 'profile' post.author.username %}"><h4 class="card-title">{{ post.author.username }}</h4></a>
+        <!-- Text -->
+        <p class="card-text">{{ post.description }}</p>
+        <p class="small text-muted">{{ post.date_posted|date }}</p>
+        <!-- Button -->
+        <div class="w-100 justify-content-center text-center text-sm-left disable-select">
+                <h3>
+                    <a class="col text-elegant-color like-btn" data-id="{{post.id}}" id="like-btn-{{post.id}}"><i
+                            class="{% if liked %} fas {% else %} far {% endif %} fa-heart"></i>
+                        {% if post.likes.count > 0 %}
+                        {{ post.likes.count }}
+                        {%endif%}
+                    </a>
+                    <a href="#" class="col text-elegant-color"><i class="far fa-comment mr-2"></i></a>
+                </h3>
+            </div>
+    </div>
+
+</div>
+<!-- Card -->
+{% endfor %}
+
 {% endblock content %}
 {% block javascript %}
 {% endblock javascript %}
