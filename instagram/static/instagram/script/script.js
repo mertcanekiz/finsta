@@ -42,14 +42,10 @@ $(document).ready(function() {
                 id: id,
             }),
             success: function(result) {
-                if (result.likeCount > 0) {
-                    if (result.liked) {
-                        btn.html('<i class="fas fa-heart"></i> ' + result.likeCount);
-                    } else {
-                        btn.html('<i class="far fa-heart"></i> ' + result.likeCount);
-                    }
+                if (result.liked) {
+                    btn.html('<i class="fas text-danger fa-heart"></i>');
                 } else {
-                    btn.html('<i class="far fa-heart"></i>');
+                    btn.html('<i class="fa-thin far text-dark fa-heart"></i>');
                 }
             }
         });
@@ -72,14 +68,10 @@ $(document).ready(function() {
                 id: id,
             }),
             success: function(result) {
-                if (result.likeCount > 0) {
-                    if (result.liked) {
-                        btn.html('<i class="fas fa-heart"></i> ' + result.likeCount);
-                    } else {
-                        btn.html('<i class="far fa-heart"></i> ' + result.likeCount);
-                    }
+                if (result.liked) {
+                    btn.html('<i class="fas text-danger fa-heart"></i>');
                 } else {
-                    btn.html('<i class="far fa-heart"></i>');
+                    btn.html('<i class="fa-thin far text-dark fa-heart"></i>');
                 }
             }
         });
