@@ -14,7 +14,7 @@
     <!-- Card content -->
     <div class="card-body">
         <!-- Title -->
-        <h4 class="card-title">{{ post.author.username }}</h4>
+        <a href="{% url 'profile' post.author.username %}"><h4 class="card-title">{{ post.author.username }}</h4></a>
         <!-- Text -->
         <p class="card-text">{{ post.description }}</p>
         <p class="small text-muted">{{ post.date_posted|date }}</p>

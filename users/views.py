@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.http import HttpResponse
 from .forms import UserRegisterForm
 from .models import Profile
+from django.contrib.auth.models import User
 
 
 def register(request):
@@ -18,5 +20,7 @@ def register(request):
     return render(request, 'users/register.html', {'form': form})
 
 
-def profile(request):
-    return 'profile page'
+def profile(request, **kwargs):
+    username = kwargs['username']
+    user = User.objects.filter(username=username).first()
+    return render(request, 'users/profile.html', {'view_user': user})

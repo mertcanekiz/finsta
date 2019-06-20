@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     '192.168.137.1',
+    '192.168.208.28',
     'localhost'
 ]
 
@@ -128,3 +129,5 @@ STATIC_URL = '/static/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL = 'instagram-home'
+
+LOGIN_URL = 'login'
