@@ -43,6 +43,9 @@
                     <a href="#" class="col text-dark"><i class="fa-thin far fa-share-square"></i></a>
                 </h4>
             </div>
+            <a href="#" class="text-dark">
+                <strong id="like-count-{{post.id}}">{{ post.likes.count }} likes</strong>
+            </a>
             <div class="mb-2">
                 <a class="text-dark mr-1" href="{% url 'profile' post.author.username %}">
                     <strong>{{ post.author.username }}</strong>

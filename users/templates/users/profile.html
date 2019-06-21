@@ -13,11 +13,27 @@
     </div>
 </div>
 
-{% for post in posts %}
+{% for post, liked in posts %}
 <!-- Card -->
-<div class="card card-cascade narrower my-5">
+<div class="card my-3">
+    <div class="card-body">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-auto">
+                        <a href="{% url 'profile' post.author.username %}">
+                            <img class="rounded-circle" width="32" src="{% static 'users/img/'|add:post.author.profile.picture %}" alt="{{ view_user.username }}">
+                        </a>
+                        </div>
+                        <div class="col my-auto">
+                            <a href="{% url 'profile' post.author.username %}" class="text-dark my-auto">
+                            <h5 class="mb-0">{{post.author.username}}</h5>
+                        </a>
+                        </div>
+                </div>
+            </div>
+    </div>
     <!-- Card image -->
-    <div class="view view-cascade overlay">
+    <div class="view overlay">
         <img class="card-img-top" src="{% static 'instagram/img/'|add:post.image %}" alt="{{ post.description }}">
         <a href="#" class="like-img">
             <div class="card-img-top mask rgba-white-slight" data-id="{{ post.id }}"></div>
@@ -26,22 +42,29 @@
     <!-- Card content -->
     <div class="card-body">
         <!-- Title -->
-        <a href="{% url 'profile' post.author.username %}"><h4 class="card-title">{{ post.author.username }}</h4></a>
+       
         <!-- Text -->
-        <p class="card-text">{{ post.description }}</p>
-        <p class="small text-muted">{{ post.date_posted|date }}</p>
         <!-- Button -->
-        <div class="w-100 justify-content-center text-center text-sm-left disable-select">
-                <h3>
+        <div class="w-100 justify-content-center disable-select">
+                <h4>
                     <a class="col text-elegant-color like-btn" data-id="{{post.id}}" id="like-btn-{{post.id}}"><i
-                            class="{% if liked %} fas {% else %} far {% endif %} fa-heart"></i>
-                        {% if post.likes.count > 0 %}
-                        {{ post.likes.count }}
-                        {%endif%}
+                            class="fa-thin {% if liked %} fas text-danger {% else %} far text-dark {% endif %} fa-heart"></i>
+                        
                     </a>
-                    <a href="#" class="col text-elegant-color"><i class="far fa-comment mr-2"></i></a>
-                </h3>
+                    <a href="#" class="col text-dark"><i class="fa-thin far fa-comment"></i></a>
+                    <a href="#" class="col text-dark"><i class="fa-thin far fa-share-square"></i></a>
+                </h4>
             </div>
+            <a href="#" class="text-dark">
+                <strong id="like-count-{{post.id}}">{{ post.likes.count }} likes</strong>
+            </a>
+            <div class="mb-2">
+                <a class="text-dark mr-1" href="{% url 'profile' post.author.username %}">
+                    <strong>{{ post.author.username }}</strong>
+                </a>
+                <span class="text-dark">{{ post.description }}</span>
+            </div>
+        <p class="small text-muted mb-0">{{ post.date_posted|date }}</p>
     </div>
 
 </div>

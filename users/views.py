@@ -25,8 +25,9 @@ def profile(request, **kwargs):
     username = kwargs['username']
     user = User.objects.filter(username=username).first()
     posts = Post.objects.filter(author=user).order_by('-date_posted')
+
     context = {
         'view_user': user,
-        'posts': posts,
+        'posts': [(post, len(post.likes.filter(username=request.user.username)) > 0) for post in posts],
     }
     return render(request, 'users/profile.html', context)
