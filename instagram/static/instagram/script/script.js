@@ -48,8 +48,8 @@ ready(function() {
         btn.onclick = function() {
             let id = btn.getAttribute('data-id');
             let likeCount = document.getElementById('like-count-' + id);
-            requestJSON('/like', {id: id}, function() {
-                result = JSON.parse(xhr.response);
+            requestJSON('/like', {id: id}, function(response) {
+                result = JSON.parse(response);
                 if (result.liked) {
                     btn.innerHTML = '<i class="fas text-danger fa-heart"></i>';
                 } else {
