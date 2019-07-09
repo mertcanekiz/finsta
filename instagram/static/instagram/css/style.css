@@ -1,7 +1,7 @@
 .asteriskField {
   color: red;
-  margin-left: .25rem;
-} 
+  margin-left: 0.25rem;
+}
 
 .container-fluid {
   margin-right: auto;
@@ -17,6 +17,6 @@
   user-select: none;
 }
 
-.fa-thin {
-  -webkit-text-stroke: .6px white;
-}
+/* .fa-thin {
+  -webkit-text-stroke: 0.6px white;
+} */

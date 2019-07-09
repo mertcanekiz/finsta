@@ -1,19 +1,5 @@
-{% extends 'instagram/layout.html' %}
 {% load static %}
-{% block content %}
 
-<div class="container">
-    <div class="row pt-3">
-        <div class="col-auto">
-            <img class="rounded-circle" width="75" src="{% static 'users/img/'|add:view_user.profile.picture %}" alt="{{ view_user.username }}">
-        </div>
-        <div class="col my-auto">
-            <h2>{{ view_user.username }}</h2>
-        </div>
-    </div>
-</div>
-
-{% for post, liked in posts %}
 <!-- Card -->
 <div class="card my-3">
     <div class="card-body">
@@ -25,7 +11,7 @@
                         </a>
                         </div>
                         <div class="col my-auto">
-                            <a href="{% url 'profile' post.author.username %}" class="text-dark my-auto">
+                            <a href="{% url 'profile' post.author.username %}" class="text-primary my-auto">
                             <h5 class="mb-0">{{post.author.username}}</h5>
                         </a>
                         </div>
@@ -34,7 +20,7 @@
     </div>
     <!-- Card image -->
     <div class="view overlay">
-        <img class="card-img-top" data-id="{{ post.id }}" src="{% static 'instagram/img/'|add:post.image %}" alt="{{ post.description }}">
+        <img data-id="{{ post.id }}" class="card-img-top" src="{% static 'instagram/img/'|add:post.image %}" alt="{{ post.description }}">
     </div>
     <!-- Card content -->
     <div class="card-body">
@@ -44,30 +30,25 @@
         <!-- Button -->
         <div class="w-100 justify-content-center disable-select">
                 <h4>
-                    <a class="col text-elegant-color like-btn" data-id="{{post.id}}" id="like-btn-{{post.id}}"><i
-                            class="fa-thin {% if liked %} fas text-danger {% else %} far text-dark {% endif %} fa-heart"></i>
+                    <a class="col like-btn" data-id="{{post.id}}" id="like-btn-{{post.id}}"><i
+                            class="fa-thin {% if liked %} fas text-danger {% else %} far {% endif %} fa-heart"></i>
                         
                     </a>
-                    <a href="#" class="col text-dark"><i class="fa-thin far fa-comment"></i></a>
-                    <a href="#" class="col text-dark"><i class="fa-thin far fa-share-square"></i></a>
+                    <a class="col"><i class="fa-thin far fa-comment"></i></a>
+                    <a class="col"><i class="fa-thin far fa-share-square"></i></a>
                 </h4>
             </div>
-            <a href="#" class="text-dark">
+            <a>
                 <strong id="like-count-{{post.id}}">{{ post.likes.count }} likes</strong>
             </a>
             <div class="mb-2">
-                <a class="text-dark mr-1" href="{% url 'profile' post.author.username %}">
+                <a class="text-primary mr-1" href="{% url 'profile' post.author.username %}">
                     <strong>{{ post.author.username }}</strong>
                 </a>
-                <span class="text-dark">{{ post.description }}</span>
+                <span>{{ post.description }}</span>
             </div>
         <p class="small text-muted mb-0">{{ post.date_posted|date }}</p>
     </div>
 
 </div>
 <!-- Card -->
-{% endfor %}
-
-{% endblock content %}
-{% block javascript %}
-{% endblock javascript %}

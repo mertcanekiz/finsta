@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from .models import Post
+from .forms import CreatePostForm
 import json
 
 
@@ -27,3 +28,16 @@ def like(request):
             liked = True
         like_count = post.likes.count()
         return JsonResponse({'liked': liked, 'likeCount': like_count})
+
+
+# @login_required
+def create(request):
+    # print(request.body)
+    if request.method == 'POST':
+        form = CreatePostForm(request.POST, request.FILES)
+        if form.is_valid():
+            return HttpResponseRedirect('/')
+    else:
+        form = CreatePostForm()
+
+    return render(request, 'instagram/create.html', {'form': form})

@@ -22,7 +22,8 @@ from instagram import views as home_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_views.home, name='instagram-home'),
-    path('like', home_views.like, name='instagram-like'),
+    path('like/', home_views.like, name='instagram-like'),
+    # path('create/', home_views.create, name='instagram-create'),
     path('register/', user_views.register, name='register'),
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
